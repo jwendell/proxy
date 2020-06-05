@@ -14,7 +14,7 @@ RUN  dnf -y upgrade --refresh && \
      dnf -y install which git make clang ninja-build \
             autoconf automake libtool cmake python2 \
             patch lld libatomic libstdc++-static \
-            libwee8 && \
+            libwee8 libcurl-devel && \
      dnf -y clean all
 
 ENV CC=clang CXX=clang++ USER=user HOME=/home/user

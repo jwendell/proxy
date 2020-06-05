@@ -8,7 +8,6 @@ build --override_repository=com_envoyproxy_protoc_gen_validate=/work/maistra/ven
 build --override_repository=com_github_c_ares_c_ares=/work/maistra/vendor/com_github_c_ares_c_ares
 build --override_repository=com_github_circonus_labs_libcircllhist=/work/maistra/vendor/com_github_circonus_labs_libcircllhist
 build --override_repository=com_github_cncf_udpa=/work/maistra/vendor/com_github_cncf_udpa
-build --override_repository=com_github_curl=/work/maistra/vendor/com_github_curl
 build --override_repository=com_github_cyan4973_xxhash=/work/maistra/vendor/com_github_cyan4973_xxhash
 build --override_repository=com_github_datadog_dd_opentracing_cpp=/work/maistra/vendor/com_github_datadog_dd_opentracing_cpp
 build --override_repository=com_github_envoyproxy_sqlparser=/work/maistra/vendor/com_github_envoyproxy_sqlparser

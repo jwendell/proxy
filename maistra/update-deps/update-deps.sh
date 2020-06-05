@@ -46,6 +46,8 @@ function init(){
         "go_sdk"
         "maistra_wee8_libs"
         "maistra_wee8_headers"
+        "com_github_curl"
+        "maistra_curl_headers"
   )
 }
 
@@ -87,6 +89,7 @@ done
 
 function apply_local_patches() {
   sed -i 's/GO_VERSION[ ]*=.*/GO_VERSION = "host"/g' ${VENDOR_DIR}/envoy/bazel/dependency_imports.bzl
+  sed -i '/^[ ]*_com_github_curl()/d' ${VENDOR_DIR}/envoy/bazel/repositories.bzl
 
   pushd "${VENDOR_DIR}/com_github_gperftools_gperftools"
     patch -p1 -i ${PATCHES_DIR}/gperftools-s390x.patch
