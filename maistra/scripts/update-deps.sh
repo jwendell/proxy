@@ -85,6 +85,22 @@ function copy_files() {
 done
 }
 
+function patch_emscripten() {
+  local em_dir="${VENDOR_DIR}/emscripten_toolchain"
+
+  rm -rf "${em_dir}/upstream/bin"
+  rm -rf "${em_dir}/upstream/lib"
+  rm -rf "${em_dir}/upstream/share"
+  rm -rf "${em_dir}/upstream/fastcomp"
+  rm -rf "${em_dir}/upstream/include"
+  rm -rf "${em_dir}/upstream/libexec"
+
+  mkdir -p "${em_dir}/upstream/bin"
+  ln -s /usr/bin/clang* "${em_dir}/upstream/bin/"
+  ln -s /usr/bin/ll* "${em_dir}/upstream/bin/"
+  ln -s /usr/bin/wasm* "${em_dir}/upstream/bin/"
+}
+
 function apply_local_patches() {
   sed -i 's/fatal_linker_warnings = true/fatal_linker_warnings = false/g' ${VENDOR_DIR}/com_googlesource_chromium_v8/wee8/build/config/compiler/BUILD.gn
   sed -i 's/GO_VERSION[ ]*=.*/GO_VERSION = "host"/g' ${VENDOR_DIR}/envoy/bazel/dependency_imports.bzl
@@ -94,10 +110,13 @@ function apply_local_patches() {
     patch -p1 -i "${PATCHES_DIR}/luajit-ppc64.patch"
     patch -p1 -i "${PATCHES_DIR}/luajit-build-flags.patch"
   popd
+
+  patch_emscripten
 }
 
 function run_bazel() {
   bazel --output_base="${OUTPUT_BASE}" fetch //... || true
+  bazel --output_base="${OUTPUT_BASE}" aquery //extensions:stats.wasm
 }
 
 function main() {

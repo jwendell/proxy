@@ -51,8 +51,10 @@ build --override_repository=com_google_protobuf=/work/maistra/vendor/com_google_
 build --override_repository=com_googlesource_chromium_v8=/work/maistra/vendor/com_googlesource_chromium_v8
 build --override_repository=com_googlesource_code_re2=/work/maistra/vendor/com_googlesource_code_re2
 build --override_repository=com_lightstep_tracer_cpp=/work/maistra/vendor/com_lightstep_tracer_cpp
+build --override_repository=commands_overloads=/work/maistra/vendor/commands_overloads
 build --override_repository=config_validation_pip3=/work/maistra/vendor/config_validation_pip3
 build --override_repository=configs_pip3=/work/maistra/vendor/configs_pip3
+build --override_repository=emscripten_toolchain=/work/maistra/vendor/emscripten_toolchain
 build --override_repository=envoy=/work/maistra/vendor/envoy
 build --override_repository=envoy_build_tools=/work/maistra/vendor/envoy_build_tools
 build --override_repository=envoy_large_machine_exec_property=/work/maistra/vendor/envoy_large_machine_exec_property
@@ -94,6 +96,10 @@ build --override_repository=rules_java=/work/maistra/vendor/rules_java
 build --override_repository=rules_pkg=/work/maistra/vendor/rules_pkg
 build --override_repository=rules_proto=/work/maistra/vendor/rules_proto
 build --override_repository=rules_python=/work/maistra/vendor/rules_python
+build --override_repository=rust_darwin_x86_64_toolchains=/work/maistra/vendor/rust_darwin_x86_64_toolchains
+build --override_repository=rust_freebsd_x86_64_toolchains=/work/maistra/vendor/rust_freebsd_x86_64_toolchains
+build --override_repository=rust_linux_x86_64_toolchains=/work/maistra/vendor/rust_linux_x86_64_toolchains
+build --override_repository=rust_windows_x86_64_toolchains=/work/maistra/vendor/rust_windows_x86_64_toolchains
 build --override_repository=six=/work/maistra/vendor/six
 build --override_repository=stringtemplate4=/work/maistra/vendor/stringtemplate4
 build --override_repository=thrift_pip3=/work/maistra/vendor/thrift_pip3
