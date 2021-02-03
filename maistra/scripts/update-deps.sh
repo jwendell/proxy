@@ -98,6 +98,7 @@ function apply_local_patches() {
 
 function run_bazel() {
   bazel --output_base="${OUTPUT_BASE}" fetch //... || true
+  bazel --output_base="${OUTPUT_BASE}" aquery //extensions:stats.wasm
 }
 
 function main() {
