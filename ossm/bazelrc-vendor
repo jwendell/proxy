@@ -31,6 +31,7 @@ build --override_repository=com_github_google_flatbuffers=/work/ossm/vendor/com_
 build --override_repository=com_github_google_jwt_verify=/work/ossm/vendor/com_github_google_jwt_verify
 build --override_repository=com_github_google_quiche=/work/ossm/vendor/com_github_google_quiche
 build --override_repository=com_github_google_tcmalloc=/work/ossm/vendor/com_github_google_tcmalloc
+build --override_repository=com_github_gperftools_gperftools=/work/ossm/vendor/com_github_gperftools_gperftools
 build --override_repository=com_github_grpc_grpc=/work/ossm/vendor/com_github_grpc_grpc
 build --override_repository=com_github_iancoleman_strcase=/work/ossm/vendor/com_github_iancoleman_strcase
 build --override_repository=com_github_jbeder_yaml_cpp=/work/ossm/vendor/com_github_jbeder_yaml_cpp
