@@ -15,7 +15,7 @@
 
 set -eo pipefail
 
-export CC=clang CXX=clang++
+export CC=clang CXX=clang++ ENVOY_OPENSSL=1
 
 function init(){
   ROOT_DIR="$(pwd)"

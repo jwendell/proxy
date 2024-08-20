@@ -36,6 +36,7 @@ build --override_repository=com_github_grpc_grpc=/work/ossm/vendor/com_github_gr
 build --override_repository=com_github_iancoleman_strcase=/work/ossm/vendor/com_github_iancoleman_strcase
 build --override_repository=com_github_jbeder_yaml_cpp=/work/ossm/vendor/com_github_jbeder_yaml_cpp
 build --override_repository=com_github_libevent_libevent=/work/ossm/vendor/com_github_libevent_libevent
+build --override_repository=com_github_luajit2_luajit2=/work/ossm/vendor/com_github_luajit2_luajit2
 build --override_repository=com_github_luajit_luajit=/work/ossm/vendor/com_github_luajit_luajit
 build --override_repository=com_github_lyft_protoc_gen_star_v2=/work/ossm/vendor/com_github_lyft_protoc_gen_star_v2
 build --override_repository=com_github_mirror_tclap=/work/ossm/vendor/com_github_mirror_tclap
