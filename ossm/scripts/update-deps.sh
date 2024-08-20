@@ -105,6 +105,8 @@ function run_bazel() {
   # Workaround to force fetch of protoc for arm
   bazel --output_base="${OUTPUT_BASE}" fetch @com_google_protobuf_protoc_linux_aarch_64//:protoc
 
+  bazel --output_base="${OUTPUT_BASE}" fetch @com_github_gperftools_gperftools//:all
+
   # Fetch all the rest and check everything using "build --nobuild "option
   for config in x86_64 aarch64 s390x ppc; do
     bazel --output_base="${OUTPUT_BASE}" build --nobuild --config="${config}" //...
