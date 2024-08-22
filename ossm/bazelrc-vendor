@@ -132,3 +132,4 @@ build --override_repository=yq_toolchains=/work/ossm/vendor/yq_toolchains
 build --override_repository=python3_11_x86_64-unknown-linux-gnu=/work/ossm/vendor/python3_11_x86_64-unknown-linux-gnu
 build --override_repository=python3_11_s390x-unknown-linux-gnu=/work/ossm/vendor/python3_11_s390x-unknown-linux-gnu
 build --override_repository=python3_11_ppc64le-unknown-linux-gnu=/work/ossm/vendor/python3_11_ppc64le-unknown-linux-gnu
+build --override_repository=python3_11_aarch64-unknown-linux-gnu=/work/ossm/vendor/python3_11_aarch64-unknown-linux-gnu

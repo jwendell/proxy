@@ -51,6 +51,7 @@ function init(){
         "python3_11_x86_64"
         "python3_11_ppc"
         "python3_11_s390x"
+        "python3_11_aarch64"
   )
 }
 
@@ -116,7 +117,7 @@ function run_bazel() {
 function patch_python() {
   local dir repo_name
 
-  for arch in x86_64 s390x ppc64le; do
+  for arch in x86_64 s390x ppc64le aarch64; do
     repo_name="python3_11_${arch}-unknown-linux-gnu"
     dir="${VENDOR_DIR}/${repo_name}"
 
