@@ -1,0 +1,38 @@
+name: Update Envoy
+
+on:
+  schedule:
+    - cron: "10 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to update"
+        default: "release-1.27"
+        required: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-envoy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{inputs.branch}}
+
+    - name: Run the update script
+      run: make ossm-update-everything
+
+    - name: Create the PR
+      uses: peter-evans/create-pull-request@v7
+      with:
+        token: ${{ secrets.GIT_TOKEN }}
+        branch: update-envoy-${{inputs.branch}}
+        title: "[${{inputs.branch}}] Update Envoy"
+        body: "[${{inputs.branch}}] Update Envoy - Automated"
+        commit-message: "[${{inputs.branch}}] Update Envoy"
+        committer: openshift-service-mesh-bot <openshiftservicemeshbot@gmail.com>
+        author: openshift-service-mesh-bot <openshiftservicemeshbot@gmail.com>
+        labels: auto-merge
