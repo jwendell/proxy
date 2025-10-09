@@ -1,0 +1,35 @@
+name: Update Envoy
+
+on:
+  schedule:
+    - cron: "10 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to update"
+        default: "release-1.27"
+        required: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-envoy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{inputs.branch}}
+
+    - name: Run the update script
+      run: make ossm-update-everything
+
+    - name: Create the PR
+      uses: peter-evans/create-pull-request@v7
+      with:
+        token: ${{ secrets.GIT_TOKEN }}
+        commit-message: "[${{inputs.branch}}] Update Envoy"
+        branch: update-envoy-${{inputs.branch}}
+        title: "[${{inputs.branch}}] Update Envoy"
+        labels: auto-merge
