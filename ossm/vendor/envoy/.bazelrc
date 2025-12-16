@@ -550,7 +550,7 @@ common:bes-envoy-engflow --bes_timeout=3600s
 common:bes-envoy-engflow --bes_upload_mode=fully_async
 common:bes-envoy-engflow --nolegacy_important_outputs
 common:rbe-envoy-engflow --remote_executor=grpcs://mordenite.cluster.engflow.com
-common:rbe-envoy-engflow --remote_default_exec_properties=container-image=docker://quay.io/jwendell/envoy-build-ubuntu@sha256:a559c5426e1a8c1fc9d6e798b334d643633cc425a2cf49069f3bebe45a2bd28d
+common:rbe-envoy-engflow --remote_default_exec_properties=container-image=docker://gcr.io/envoy-ci/envoy-build@sha256:95d7afdea0f0f8881e88fa5e581db4f50907d0745ac8d90e00357ac1a316abe5
 common:rbe-envoy-engflow --jobs=200
 common:rbe-envoy-engflow --define=engflow_rbe=true
 
@@ -560,6 +560,8 @@ common:remote-envoy-engflow --config=rbe-envoy-engflow
 
 common:remote-cache-envoy-engflow --config=common-envoy-engflow
 common:remote-cache-envoy-engflow --config=cache-envoy-engflow
+
+common:cves --//tools/dependency:cve-data=//tools/dependency:cve-data-dir
 
 # Specifies the rustfmt.toml for all rustfmt_test targets.
 build --@rules_rust//rust/settings:rustfmt.toml=//:rustfmt.toml
@@ -585,6 +587,12 @@ common:debug --config=debug-bazel
 common:debug --config=debug-sandbox
 common:debug --config=debug-coverage
 common:debug --config=debug-tests
+
+#############################################################################
+# compat: Compatibility with main branch repo settings
+#############################################################################
+common:bes --config=bes-envoy-engflow
+common:rbe --config=remote-envoy-engflow
 
 try-import %workspace%/repo.bazelrc
 try-import %workspace%/clang.bazelrc

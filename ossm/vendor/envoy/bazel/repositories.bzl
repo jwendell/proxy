@@ -135,6 +135,8 @@ def envoy_dependencies(skip_targets = []):
     # Setup external Bazel rules
     _foreign_cc_dependencies()
 
+    _openssl()
+
     # Binding to an alias pointing to the bssl-compat layer
     native.bind(
         name = "ssl",
@@ -284,7 +286,7 @@ def _boringssl_fips():
         name = "fips_cmake_linux_aarch64",
         build_file_content = CMAKE_BUILD_CONTENT,
     )
-    GO_BUILD_CONTENT = "%s\nexports_files([\"bin/go\"])" % BUILD_ALL_CONTENT
+    GO_BUILD_CONTENT = "%s\nexports_files([\"bin/go\"])" % _build_all_content(["test/**"])
     external_http_archive(
         name = "fips_go_linux_amd64",
         build_file_content = GO_BUILD_CONTENT,
@@ -298,6 +300,12 @@ def _aws_lc():
     external_http_archive(
         name = "aws_lc",
         build_file = "@envoy//bazel/external:aws_lc.BUILD",
+    )
+
+def _openssl():
+    external_http_archive(
+        name = "openssl",
+        build_file = "@envoy//bazel/external:openssl.BUILD",
     )
 
 def _com_github_openhistogram_libcircllhist():
@@ -717,6 +725,7 @@ def _v8():
         name = "v8",
         patches = [
             "@envoy//bazel:v8.patch",
+            "@envoy//bazel:v8-ppc64le.patch",
         ],
         patch_args = ["-p1"],
         patch_cmds = [
@@ -745,6 +754,10 @@ def _fast_float():
 def _highway():
     external_http_archive(
         name = "highway",
+        patches = [
+            "@envoy//bazel:highway-ppc64le.patch",
+        ],
+        patch_args = ["-p1"],
     )
 
 def _dragonbox():

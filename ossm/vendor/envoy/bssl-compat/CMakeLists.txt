@@ -7,9 +7,6 @@ if(POLICY CMP0135)
   cmake_policy(SET CMP0135 NEW)
 endif()
 
-set(OPENSSL_URL      https://github.com/openssl/openssl/archive/refs/tags/openssl-3.0.13.tar.gz)
-set(OPENSSL_URL_HASH e74504ed7035295ec7062b1da16c15b57ff2a03cd2064a28d8c39458cacc45fc)
-
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
@@ -38,6 +35,7 @@ add_dependencies(bssl-gen ossl-gen) # generate ossl headers before bssl headers
 
 # custom mappings
 add_library(bssl-compat STATIC
+  source/ossl_dlopen.c
   source/ASN1_TIME_free.cc
   source/BASIC_CONSTRAINTS_free.cc
   source/BASIC_CONSTRAINTS_new.cc
@@ -319,9 +317,9 @@ target_add_bssl_include(bssl-compat
 target_add_bssl_function(bssl-compat
   ASN1_ENUMERATED_to_BN
   ASN1_IA5STRING_free
+  ASN1_BMPSTRING_new
   ASN1_IA5STRING_new
-  ASN1_IA5STRING_new
-  ASN1_IA5STRING_new
+  ASN1_UNIVERSALSTRING_new
   ASN1_INTEGER_free
   ASN1_INTEGER_new
   ASN1_INTEGER_to_BN
@@ -336,6 +334,8 @@ target_add_bssl_function(bssl-compat
   ASN1_TIME_diff
   ASN1_TIME_new
   ASN1_TIME_set
+  ASN1_TYPE_new
+  ASN1_TYPE_set
   BIO_clear_flags
   BIO_clear_retry_flags
   BIO_clear_flags
@@ -468,6 +468,7 @@ target_add_bssl_function(bssl-compat
   EVP_SignUpdate
   EVP_SignFinal
   GENERAL_NAME_set0_value
+  GENERAL_NAME_set0_othername
   HMAC
   HMAC_CTX_free
   HMAC_CTX_new
@@ -702,6 +703,7 @@ target_add_bssl_source(bssl-compat
 )
 target_compile_definitions(bssl-compat PUBLIC ossl_OPENSSL_SUPPRESS_DEPRECATED)
 target_include_directories(bssl-compat PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(bssl-compat PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/source)
 target_include_directories(bssl-compat PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/include)
 target_include_directories(bssl-compat PUBLIC ${CMAKE_CURRENT_BINARY_DIR}/source)
 target_link_libraries(bssl-compat INTERFACE ${CMAKE_DL_LIBS})

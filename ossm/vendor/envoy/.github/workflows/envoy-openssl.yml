@@ -4,7 +4,6 @@ permissions:
   contents: read
 
 on:
-  push:
   pull_request:
 
 concurrency:
@@ -14,7 +13,7 @@ concurrency:
 
 jobs:
   openssl:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 180
     permissions:
       contents: read
@@ -34,4 +33,3 @@ jobs:
           --config=remote-ci
         ENVOY_RBE: 1
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        ENVOY_BUILD_IMAGE: quay.io/jwendell/envoy-build-ubuntu:openssl-f4a881a1205e8e6db1a57162faf3df7aed88eae8
