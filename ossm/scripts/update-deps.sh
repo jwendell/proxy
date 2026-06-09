@@ -31,6 +31,7 @@ function init(){
 
 
   IGNORE_LIST=(
+        "antlr4-cpp-runtime"
         "bazel_tools"
         "cmake"
         "envoy_api"
@@ -39,7 +40,7 @@ function init(){
         "local_jdk"
         "bazel_gazelle_go"
         "openssl"
-        "llvm_toolchain_llvm"
+        "llvm_toolchain"
         "go_sdk"
         "host_platform"
         "remotejdk"
@@ -85,7 +86,7 @@ function copy_files() {
       fi
 
       cp_flags="-rL"
-      if [ "${repo_name}" == "emscripten_toolchain" ] || [ "${repo_name}" == "antlr4-cpp-runtime" ] || [ "${repo_name}" == "envoy_toolshed" ] || [[ "${repo_name}" == *"luajit2"* ]] || [ "${repo_name}" == "llvm_toolchain" ]; then
+      if [ "${repo_name}" == "envoy_toolshed" ] || [[ "${repo_name}" == *"luajit2"* ]]; then
         cp_flags="-r"
       fi
       cp "${cp_flags}" "${f}" "${VENDOR_DIR}" || echo "Copy of ${f} failed. Ignoring..."
@@ -101,6 +102,8 @@ function copy_files() {
   find "${VENDOR_DIR}" -name __pycache__ -type d -print0 | xargs -0 -r rm -rf
   find "${VENDOR_DIR}" -name '*.pyc' -delete
   rm -rf "${VENDOR_DIR}/boringssl/third_party" "${VENDOR_DIR}/boringssl/crypto/cipher/test"
+  # Remove the line below when envoy_toolshed is updated to 0.3.35
+  rm "${VENDOR_DIR}/envoy_toolshed/bazel-bin" "${VENDOR_DIR}/envoy_toolshed/bazel-bazel" "${VENDOR_DIR}/envoy_toolshed/bazel-out" "${VENDOR_DIR}/envoy_toolshed/bazel-testlogs"
 }
 
 function run_bazel() {

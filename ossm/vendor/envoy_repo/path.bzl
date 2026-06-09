@@ -1,1 +1,1 @@
-PATH = '/tmp/proxy-deps-output-base/external/envoy'
+PATH = '/tmp/tmp.qOiQm983gR/external/envoy'
